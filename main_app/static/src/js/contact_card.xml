@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="custom_contact_card.ContactCard">
+        <div class="contact-card" t-att-class="statusClasses[state.currentStatus]">
+            <div class="card-header">
+                <div class="avatar" t-if="props.contact.avatar">
+                    <img t-att-src="props.contact.avatar" alt="Avatar"/>
+                </div>
+                <div class="avatar" t-else="">
+                    <t t-esc="getInitials()"/>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <span t-esc="state.currentStatus"/>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3><t t-esc="props.contact.name"/></h3>
+                <p t-esc="props.contact.title or ''"/>
+                <p class="company" t-esc="props.contact.company or ''"/>
+            </div>
+            <div class="card-footer">
+                <div class="status-selector">
+                    <button t-foreach="['online', 'busy', 'away']" t-as="status"
+                            t-att-class="state.currentStatus === status ? 'active' : ''"
+                            onclick="() => changeStatus(status)">
+                        <t t-esc="status"/>
+                    </button>
+                </div>
+                <div class="quick-actions">
+                    <button onclick="() => handleAction('call')">
+                        <i class="fa fa-phone"/>
+                    </button>
+                    <button onclick="() => handleAction('email')">
+                        <i class="fa fa-envelope"/>
+                    </button>
+                    <button onclick="() => handleAction('message')">
+                        <i class="fa fa-comment"/>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

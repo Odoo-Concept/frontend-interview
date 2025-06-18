@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_inherit_contact_card" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.contact.card</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!-- Posición modificada: dentro del formulario existente -->
+            <xpath expr="//sheet" position="before">
+                <div class="row">
+                    <div class="col-12">
+                        <owl-component name="custom_contact_card.ContactCard"/>
+                    </div>
+                </div>
+            </xpath>
+
+            <!-- Añadir campo para estado de disponibilidad -->
+            <xpath expr="//field[@name='function']" position="after">
+                <field name="availability_status" invisible="0"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
